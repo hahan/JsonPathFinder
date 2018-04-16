@@ -1,6 +1,7 @@
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
+import com.google.gson.stream.MalformedJsonException;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -59,8 +60,12 @@ public final class JsonPathFinder {
             jsonInput.append(nextLine);
         }
 
-        JsonPathFinder jsonPathFinder = new JsonPathFinder(jsonInput.toString());
-        jsonPathFinder.print(System.out);
+        try{
+            JsonPathFinder jsonPathFinder = new JsonPathFinder(jsonInput.toString());
+            jsonPathFinder.print(System.out);
+        }catch (MalformedJsonException exception){
+            System.out.println("Error: Malformed json input.");
+        }
     }
 
     void print(OutputStream out) throws IOException {
