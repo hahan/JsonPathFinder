@@ -15,6 +15,7 @@ $ java -jar out/artifacts/jsonparser_jar/jsonparser.jar
   {
   "a":{"c":1}
   }
+  (newline, press enter)
   <end>
   {
       "a.c": 1
