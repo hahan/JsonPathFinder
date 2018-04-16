@@ -68,6 +68,20 @@ public final class JsonPathFinder {
         }
     }
 
+    /**
+     * Prints the Json with paths to every terminal value in the input json. It uses a stack to push the json elements
+     * as it finds in the input and on finding a terminal value, builds the path from all elements pushed to the stack
+     * and keep on removing the elements as it finds those terminal values or end of the object.
+     *
+     * Note that it adds/removes elements from the stack as it processes the json objects and adds to the output while reaching
+     * terminal values for each object.
+     *
+     * E.g.
+     * In case of {"a" : 1}, it adds "a" to the stack and on reaching 1, it removes "a" and prints "a" : 1.
+     * In case of {"a" : {"c" : 1}}, it adds ["a","c"(top)] to the stack and on reaching 1, prints path as "a.c", removes
+     * "c" and then "a" on reaching end of the object.
+     *
+     */
     void print(OutputStream out) throws IOException {
         InputStream in = new ByteArrayInputStream(inputJson.getBytes());
 
