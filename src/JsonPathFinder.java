@@ -124,8 +124,12 @@ public final class JsonPathFinder {
                     objectStack.pop();
                     break;
                 case NULL:
+                    //reached the terminal, get the path..
+                    beforeValue(writer, objectStack);
                     reader.nextNull();
                     writer.nullValue();
+                    //.. and remove the last element from the path
+                    objectStack.pop();
                     break;
                 case END_DOCUMENT:
                     writer.endObject();
